@@ -5,6 +5,9 @@ fn main() {
     function2(10);
     function3(10, 55);
     function4();
+    
+    let value = function5();
+    println!("In main. Value from function5: {}", value);
 }
 
 fn function1() {
@@ -27,4 +30,9 @@ fn function4() {
     };
 
     println!("In function4. Value: {}", value1);
+}
+
+fn function5() -> i32 {
+    println!("In function5");
+    5
 }
