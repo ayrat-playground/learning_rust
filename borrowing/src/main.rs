@@ -8,8 +8,14 @@ fn main() {
     println!("Changes string: {}", s2);
 
     let first_word = first_word(&s2);
-    println!("First word is {}", first_word);
-    s2.clear();
+    println!("First word index is {}", first_word);
+
+    let slice_first_word = first_word_with_slice(&s2);
+    println!("First word is {}", slice_first_word);
+
+    // s2.clear();
+
+
 }
 
 fn calculate_length(s: &String) -> usize {
@@ -30,4 +36,16 @@ fn first_word(s: &String) -> usize {
     }
 
     s.len()
+}
+
+fn first_word_with_slice(s: &str) -> &str {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    &s[..]
 }
