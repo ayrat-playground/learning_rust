@@ -84,17 +84,44 @@ fn main() {
         *count += 1;
     }
     println!("{:?}", map);
+
+    let int_list = vec!(1, 5, 6);
+    println!("{:?}", vector_attributes(int_list));
 }
 
-enum VectorAttrs {
-    Mean(f64),
-    Median(i32),
-    Mode(i32)
+#[derive(Debug)]
+struct VectorAttrs {
+    mean: f64,
+    median: i32,
+    mode: i32
 }
 
 fn vector_attributes(vector: Vec<i32>) -> VectorAttrs {
+    let mut mean = 0;
+    let mut count_map = HashMap::new();
+
     for number in vector.iter() {
-        
+        mean = mean + number;
+
+        let count = count_map.entry(number).or_insert(0);
+        *count += 1;
     }
-    vec!(0.1)
+
+    let mut max_count = 0;
+    let mut mo_d: i32 = 0;
+
+    for (number, count) in &count_map {
+        if count > &max_count {
+            mo_d = **number as i32;
+            max_count = *count as i32;
+        }
+    }
+
+    let mean = ( mean as f64 ) / ( vector.len() as f64 );
+
+    VectorAttrs {
+        mean: mean,
+        mode: mo_d,
+        median: 0
+    }
 }
