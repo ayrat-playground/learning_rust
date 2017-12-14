@@ -8,6 +8,7 @@ use image::ColorType;
 use image::png::PNGEncoder;
 use std::fs::File;
 use std::io::Write;
+use std::fmt::{Display, Formatter, Error};
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
@@ -113,8 +114,8 @@ fn render(pixels: &mut [u8],
 {
     assert!(pixels.len() == bounds.0 * bounds.1);
 
-    for row in 0..bounds.0 {
-        for column in 0..bounds.1 {
+    for row in 0..bounds.1 {
+        for column in 0..bounds.0 {
             let point = pixel_to_point(bounds, (column, row),
                                        upper_left, lower_right);
 
